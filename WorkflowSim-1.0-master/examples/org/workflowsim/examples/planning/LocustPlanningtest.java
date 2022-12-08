@@ -80,7 +80,13 @@ public class LocustPlanningtest extends WorkflowSimBasicExample1{
         	
         	//double ratio = Math.pow(rangePower, i);// (500*1.8)(500*3.6)(500*5.4)(500*7.2)
         	//double ratio=i+1.5; //Alanzy update ratio = i+1.5; mips * ratio // (bw*ratio)
-            vm[i] = new CondorVM(i, userId, JobSchedulingConstants.VM_MIPS + ratio , JobSchedulingConstants.pesNumber, JobSchedulingConstants.VM_ram, (long) (JobSchedulingConstants.VM_BW * 1), JobSchedulingConstants.VM_SIZE, JobSchedulingConstants.vmm, new CloudletSchedulerSpaceShared());
+            
+        	// The VM constructor that uses the DC cost model.
+        	//vm[i] = new CondorVM(i, userId, JobSchedulingConstants.VM_MIPS + ratio , JobSchedulingConstants.pesNumber, JobSchedulingConstants.VM_ram, (long) (JobSchedulingConstants.VM_BW * 1), JobSchedulingConstants.VM_SIZE, JobSchedulingConstants.vmm, new CloudletSchedulerSpaceShared());
+        	
+        	// The VM constructor that uses the VM cost model.
+        	vm[i] = new CondorVM(i, userId, JobSchedulingConstants.VM_MIPS + ratio , JobSchedulingConstants.pesNumber, JobSchedulingConstants.VM_ram, (long) (JobSchedulingConstants.VM_BW * 1), JobSchedulingConstants.VM_SIZE, JobSchedulingConstants.vmm,JobSchedulingConstants.Vmcost,JobSchedulingConstants.VmcostPerCpu,JobSchedulingConstants.VmcostPerMem,JobSchedulingConstants.VmcostPerStorage,JobSchedulingConstants.VmcostPerBw ,new CloudletSchedulerSpaceShared());
+
             list.add(vm[i]);
         	System.out.println("Random vm" + i +" is = " + dft.format(vm[i].getMips()) +" || the ratio value is = " + dft.format(ratio));
         }

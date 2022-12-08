@@ -112,7 +112,7 @@ public class WorkflowSimBasicExample1 {
             /**
              * Should change this based on real physical path
              */
-            String daxPath = "/Users/User/git/WorkflowSim-1.0.0/config/dax/Montage_100.xml";
+            String daxPath = "/Users/User/git/WorkflowSim-1.0.0/config/dax/Montage_1000.xml";
             if(daxPath == null){
                 Log.printLine("Warning: Please replace daxPath with the physical path in your working environment!");
                 return;

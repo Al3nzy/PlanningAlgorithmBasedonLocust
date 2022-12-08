@@ -32,7 +32,7 @@ public class JobSchedulingConstants {
 		 *  
 		 * VM Parameters
 		 */	
-		public final static int		VM_number 		 = 1000;
+		public final static int		VM_number 		 = 20;
 		public final static int		VM_ram			 = 512; // vm memory (MB) 512; \\40 GB = 40000
 		public final static int 	pesNumber 		 = 1; // number of cpus
 		public final static String 	vmm 			 = "Xen"; // VMM name
@@ -47,6 +47,13 @@ public class JobSchedulingConstants {
 		public final static double	ratio			 = 0; // 0 if no increment will be applied and 1 if there is range of VM MIPS (firstRange & LastRange).
 		public final static double	firstRange		 = VM_MIPS; 
 		public final static double	lastRange 	 	 = 2000; 
+		// The cost parameters in case Using the Cost per VM (Contractor 2, 3) in CondorVM.java
+		public final static double Vmcost 			 = 2.224;  // as set in paper 13       
+		public final static double VmcostPerCpu 	 = 3.0;    // the cost of using processing in this resource
+		public final static double VmcostPerMem 	 = 0.05;   // the cost of using memory in this resource
+		public final static double VmcostPerStorage  = 0.1;	   // the cost of using storage in this resource
+        public final static double VmcostPerBw 		 = 0.1;	   // the cost of using bw in this resource
+		
 		
 		/**
 		 * @return the array of VM MIPS by sending the VM number to make the array based on 
