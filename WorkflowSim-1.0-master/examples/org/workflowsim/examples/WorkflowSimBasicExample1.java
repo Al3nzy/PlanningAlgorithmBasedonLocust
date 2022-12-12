@@ -112,7 +112,7 @@ public class WorkflowSimBasicExample1 {
             /**
              * Should change this based on real physical path
              */
-            String daxPath = "/Users/User/git/WorkflowSim-1.0.0/config/dax/Montage_1000.xml";
+            String daxPath = "E:/WorkflowSim-1.0-master/WorkflowSim-1.0-master/config/dax/Montage_100.xml";
             if(daxPath == null){
                 Log.printLine("Warning: Please replace daxPath with the physical path in your working environment!");
                 return;
@@ -256,20 +256,21 @@ public class WorkflowSimBasicExample1 {
         //    properties of a data center: architecture, OS, list of
         //    Machines, allocation policy: time- or space-shared, time zone
         //    and its price (G$/Per time unit).
-        String arch = "x86";      // system architecture
-        String os = "Linux";          // operating system
-        String vmm = "Xen";
-        double time_zone = 10.0;         // time zone this resource located
-        double cost = 3.0;              //3.0 the cost of using processing in this resource
-        double costPerMem = 0.05;		// the cost of using memory in this resource
-        double costPerStorage = 0.1;	// the cost of using storage in this resource
-        double costPerBw = 0.1;			// the cost of using bw in this resource
+
         LinkedList<Storage> storageList = new LinkedList<Storage>();	//we are not adding SAN devices by now
         WorkflowDatacenter datacenter = null;
 
 
         DatacenterCharacteristics characteristics = new DatacenterCharacteristics(
-                arch, os, vmm, hostList, time_zone, cost, costPerMem, costPerStorage, costPerBw);
+        		JobSchedulingConstants.arch, 
+        		JobSchedulingConstants.os, 
+        		JobSchedulingConstants.DC_vmm, 
+        		hostList, 
+        		JobSchedulingConstants.time_zone, 
+                JobSchedulingConstants.cost, 
+                JobSchedulingConstants.costPerMem, 
+                JobSchedulingConstants.costPerStorage, 
+                JobSchedulingConstants.costPerBw);
 
 
         // 6. Finally, we need to create a storage object.
@@ -337,7 +338,10 @@ public class WorkflowSimBasicExample1 {
             	c3=c3+(job.getActualCPUTime()* 0.9);
             	x++;
            }
+         //   double Vmcost=0;
+            
             cost += job.getProcessingCost();
+            
             if (job.getCloudletStatus() == Cloudlet.SUCCESS) {
                 Log.print("SUCCESS");
 
@@ -375,16 +379,22 @@ public class WorkflowSimBasicExample1 {
 		 
 		averCOSTTTT=(c0+c1+c2+c3);
 		  Log.printLine();
+		  int JobNo=list.size()-1;
         Log.printLine("___________________________________ ");
-        Log.printLine("costttt= "+averCOSTTTT +"  for "+x+"x");
+        Log.printLine("The cost for the first 4 VMs= "+averCOSTTTT +"  for "+x+" Jobs");
         Log.printLine("The Overall Makespan is: " + dft.format(makespan.overall()));
         Log.printLine("The total cost is " + dft.format(cost));
+        Log.printLine("Number of Jobs = " + JobNo);
+        Log.print("Number of VMs  = " + VmNo);
+       
+        
        // System.out.println( "The Overall Makespan = "+makespan.overall());
    //     waitingtime.AverageWaitingTime(list);
         //setAveragemakespan(makespan.overall());
         Averagemakespan[JobSchedulingConstants.current_iteration]=makespan.overall();
         AverageCost[JobSchedulingConstants.current_iteration]=cost;
-		  Log.printLine();
+		 // Log.printLine();
+		  
     }
 	public static double[] getAverageCost() {
 		return AverageCost;
