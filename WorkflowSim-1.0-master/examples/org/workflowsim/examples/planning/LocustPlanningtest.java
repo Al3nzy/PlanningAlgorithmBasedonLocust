@@ -1,20 +1,7 @@
 /**
- * Copyright 2012-2013 University Of Southern California
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
+ * Copyright 2022-2023 University Of Putra Malaysia
  */
 package org.workflowsim.examples.planning;
-
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -37,9 +24,7 @@ import org.workflowsim.utils.Parameters;
 import org.workflowsim.utils.ReplicaCatalog;
 
 /**
- * This DHEFTPlanningAlgorithmExample1 creates a workflow planner, a workflow
- * engine, and one schedulers, one data centers and 20 heterogeneous vms that
- * has different communication cost (such that HEFT algorithm should work)
+ * This Locust Optimization Algorithm that used as a PhD work 
  *
  * @author Ala'anzy
  * @since WorkflowSim Toolkit 1.1
@@ -56,25 +41,13 @@ public class LocustPlanningtest extends WorkflowSimBasicExample1{
         //Creates a container to store VMs. This list is passed to the broker later
         LinkedList<CondorVM> list = new LinkedList<CondorVM>();
 
-//		  VM Parameters
-//        long size 	= 10000; //image size (MB)
-//        int ram 		= 512; //vm memory (MB)
-//        int mips  	= 1000;
-//        long bw 		= 1000;
-//        int pesNumber = 1; //number of cpus
-//        String vmm 	= "Xen"; //VMM name
-
         //create VMs
         CondorVM[] vm = new CondorVM[vms];
         double rangePower=((JobSchedulingConstants.lastRange-JobSchedulingConstants.firstRange)/JobSchedulingConstants.firstRange)/(vms-1); //the percentage of increasements based on the first and last range of VM increasing. takeing into consideration the number of VMs. 
         double ratio=JobSchedulingConstants.ratio;
         	//Random bwRandom = new Random(System.currentTimeMillis());
       
-        for (int i = 0; i < vms; i++){            
-        	//double ratio = bwRandom.nextDouble(); //to get range 0<ratio<1
-        	// ratio = 0;
-        	//double ratio = Math.pow(2, i);// 2-4-8 (250*2)(250*4)(250*8)
-
+        for (int i = 0; i < vms; i++){           
         	ratio = (rangePower* i)*JobSchedulingConstants.ratio;// I multiplied by Job....ratio to make the increment 0 in case there is fix VM MIPS where I will send the ratio 0 or 1 (0 if no increment and 1 if there is increment).
         	ratio=ratio*JobSchedulingConstants.firstRange; // the increasing for the specific VM will maintaining the First range.
         	
@@ -120,26 +93,23 @@ public class LocustPlanningtest extends WorkflowSimBasicExample1{
              * the data center or the host doesn't have sufficient resources the
              * exact vmNum would be smaller than that. Take care.
              */
-          //  int vmNum = 5;//number of vms;
-            /**
+
+        	/**
              * Should change this based on real physical path
-             */
-            String daxPath = "E:/WorkflowSim-1.0-master/WorkflowSim-1.0-master/config/dax/Montage_1000.xml";//CyberShake ;Sipht_1000
-            
+             *///"E:/WorkflowSim-1.0-master/WorkflowSim-1.0-master/config/dax/Montage_1000.xml";//CyberShake ;Sipht_1000            
+            String daxPath = "D:/dax/Montage_1000.xml";//CyberShake ;Sipht_1000            
             File daxFile = new File(daxPath);
             if(!daxFile.exists()){
                 Log.printLine("Warning: Please replace daxPath with the physical path in your working environment!");
                 return;
             }
 
-            /**
-             * Since we are using HEFT planning algorithm, the scheduling algorithm should be static 
-             * such that the scheduler would not override the result of the planner
-             */
             Parameters.SchedulingAlgorithm sch_method = Parameters.SchedulingAlgorithm.STATIC;
             Parameters.PlanningAlgorithm pln_method = Parameters.PlanningAlgorithm.LocustTestPlanning; // INVALID, RANDOM, HEFT, DHEFT, LocustTestPlanning
             ReplicaCatalog.FileSystem file_system = ReplicaCatalog.FileSystem.LOCAL;
 
+           
+            
             /**
              * No overheads 
              */
@@ -166,7 +136,6 @@ public class LocustPlanningtest extends WorkflowSimBasicExample1{
 
             // Initialize the CloudSim library
             CloudSim.init(num_user, calendar, trace_flag);
-
             WorkflowDatacenter datacenter0 = createDatacenter("Datacenter_0");
 
             /**
@@ -201,6 +170,13 @@ public class LocustPlanningtest extends WorkflowSimBasicExample1{
             CloudSim.stopSimulation();
 
             printJobList(outputList0);
+            Log.print("    The MIPS for them as follows :[");
+            for (int i = 0; i < vmlist0.size(); i++) {
+            	Log.print(vmlist0.get(i).getMips()+", ");
+                vmlist0.get(i).getMips();	
+			}
+            Log.print("]");
+            Log.printLine();
             Log.printLine(" Simulation has been done!");
 			Log.printLine();
 			Log.printLine("_______________________________________________");
