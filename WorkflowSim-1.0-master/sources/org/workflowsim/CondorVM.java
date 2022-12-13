@@ -59,7 +59,16 @@ public class CondorVM extends Vm {
      * the cost of using CPU in this resource
      */
     private double cost = 0.0;
-	private double VMCost;	
+	
+    /**
+    * The cost of using this VM
+    *  
+    * Some research article have considered the price by VM regardless the resources using in that VM.
+    * 
+    * @author Mohammed Ala'anzy.
+    * @since 8/12/2022.
+    */
+    private double VMCost;	
     
     /**
      * Creates a new CondorVM object (First constructor).
@@ -157,7 +166,9 @@ public class CondorVM extends Vm {
     }
     
     /**
-     * Creates a new CondorVM object (Second constructor).
+     * Creates a new CondorVM object (Third constructor).
+     * Created by @author Mohammed Ala'anzy
+     * To include the VM cost regardless the VM resources..
      *
      * @param id unique ID of the VM
      * @param userId ID of the VM's owner
