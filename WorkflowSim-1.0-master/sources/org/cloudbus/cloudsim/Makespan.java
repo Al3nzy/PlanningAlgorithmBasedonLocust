@@ -5,7 +5,7 @@ public class Makespan {
 	private double[] saving;
 
 	public Makespan() {
-		System.out.println("I am in makspan constructor");
+		System.out.println("Calculting the Makespan...");
 	}
 
 

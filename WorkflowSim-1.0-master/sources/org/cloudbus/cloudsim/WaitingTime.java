@@ -12,7 +12,7 @@ public class WaitingTime {
 	
 	
 	public WaitingTime() {
-		System.out.println("I am in WaitingTime constructor");
+		System.out.println("Calculating the WaitingTime...");
 	}
 	public  double AverageWaitingTime(List<Job> list) {
 		int size = list.size();
