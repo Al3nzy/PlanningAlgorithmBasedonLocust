@@ -58,7 +58,22 @@ public class LocustPlanningtest extends WorkflowSimBasicExample1{
         	//vm[i] = new CondorVM(i, userId, JobSchedulingConstants.VM_MIPS + ratio , JobSchedulingConstants.pesNumber, JobSchedulingConstants.VM_ram, (long) (JobSchedulingConstants.VM_BW * 1), JobSchedulingConstants.VM_SIZE, JobSchedulingConstants.vmm, new CloudletSchedulerSpaceShared());
         	
         	// The VM constructor that uses the VM cost model.
-        	vm[i] = new CondorVM(i, userId, JobSchedulingConstants.VM_MIPS + ratio , JobSchedulingConstants.pesNumber, JobSchedulingConstants.VM_ram, (long) (JobSchedulingConstants.VM_BW * 1), JobSchedulingConstants.VM_SIZE, JobSchedulingConstants.vmm,JobSchedulingConstants.Vmcost,JobSchedulingConstants.VmcostPerCpu,JobSchedulingConstants.VmcostPerMem,JobSchedulingConstants.VmcostPerStorage,JobSchedulingConstants.VmcostPerBw ,new CloudletSchedulerSpaceShared());
+        	vm[i] = new CondorVM(i, 
+        			userId, 
+        		//	JobSchedulingConstants.VM_MIPS + ratio ,
+        			JobSchedulingConstants.VM_MIPSArr[i] ,
+        			JobSchedulingConstants.pesNumber,
+        			JobSchedulingConstants.VM_ram,
+        			(long) (JobSchedulingConstants.VM_BW * 1),
+        			JobSchedulingConstants.VM_SIZE,
+        			JobSchedulingConstants.vmm,
+        			JobSchedulingConstants.Vmcost,
+        			JobSchedulingConstants.VariantVmcost[i], // in case there is varian of cost prices based on the Vm using
+        			//JobSchedulingConstants.VmcostPerCpu,
+        			JobSchedulingConstants.VmcostPerMem,
+        			JobSchedulingConstants.VmcostPerStorage,
+        			JobSchedulingConstants.VmcostPerBw,
+        			new CloudletSchedulerSpaceShared());
 
             list.add(vm[i]);
         	System.out.println("Random vm" + i +" is = " + dft.format(vm[i].getMips()) +" || the ratio value is = " + dft.format(ratio));
@@ -96,8 +111,9 @@ public class LocustPlanningtest extends WorkflowSimBasicExample1{
 
         	/**
              * Should change this based on real physical path
-             *///"E:/WorkflowSim-1.0-master/WorkflowSim-1.0-master/config/dax/Montage_1000.xml";//CyberShake ;Sipht_1000            
-            String daxPath = "D:/dax/Montage_1000.xml";//CyberShake ;Sipht_1000            
+             */
+            String daxPath = JobSchedulingConstants.daxPath;//CyberShake ;Sipht_1000
+            
             File daxFile = new File(daxPath);
             if(!daxFile.exists()){
                 Log.printLine("Warning: Please replace daxPath with the physical path in your working environment!");
@@ -108,7 +124,11 @@ public class LocustPlanningtest extends WorkflowSimBasicExample1{
             Parameters.PlanningAlgorithm pln_method = Parameters.PlanningAlgorithm.LocustTestPlanning; // INVALID, RANDOM, HEFT, DHEFT, LocustTestPlanning
             ReplicaCatalog.FileSystem file_system = ReplicaCatalog.FileSystem.LOCAL;
 
-           
+            /**
+             * Set the cost model to be VM (the default is Datacenter
+             */
+            Parameters.setCostModel(Parameters.CostModel.VM); // I can choose between DATACENTER & VM model
+
             
             /**
              * No overheads 
@@ -172,10 +192,15 @@ public class LocustPlanningtest extends WorkflowSimBasicExample1{
             printJobList(outputList0);
             Log.print("    The MIPS for them as follows :[");
             for (int i = 0; i < vmlist0.size(); i++) {
-            	Log.print(vmlist0.get(i).getMips()+", ");
+            	Log.print(vmlist0.get(i).getMips());
+            	if (i<vmlist0.size()-1) {
+            		Log.print("|");
+				}    	
                 vmlist0.get(i).getMips();	
+                if (i >= vmlist0.size()-1)
+                	Log.print("]");
 			}
-            Log.print("]");
+            
             Log.printLine();
             Log.printLine(" Simulation has been done!");
 			Log.printLine();
