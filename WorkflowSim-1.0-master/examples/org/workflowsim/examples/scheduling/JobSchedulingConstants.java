@@ -55,7 +55,7 @@ public class JobSchedulingConstants {
 		public final static double VmcostPerMem 	 = 0.05;   // the cost of using memory in this resource
 		public final static double VmcostPerStorage  = 0.1;	   // the cost of using storage in this resource
         public final static double VmcostPerBw 		 = 0.001;	   // the cost of using bw in this resource
-		
+		// testing the committing.f.
         /**
 		 * @return the array of VM MIPS by sending the VM number to make the array based on 
 		 * 
@@ -111,7 +111,7 @@ public class JobSchedulingConstants {
 		public final static String os        		= "Linux"; // operating system
 		public final static String DC_vmm 	 		= "Xen";
 		public final static double time_zone 		= 10.0; // time zone this resource located
-		public final static double cost		 		= 3.0; // the cost of using processing in this resource
+		public final static double cost		 		= 2.0; // (original 3.0) the cost of using processing in this resource
 		public final static double costPerMem		= 0.05; // the cost of using memory in this resource
 		public final static double costPerStorage	= 0.1; // the cost of using storage in this resource
 		public final static double costPerBw		= 0.1; // the cost of using bw in this resource		
