@@ -26,7 +26,7 @@ public class JobSchedulingConstants {
 		//public final static double CLOUDLET_LENGTH_startRandomValue= 1000; //The initial value for the random generation 
 		//public final static double CLOUDLET_LENGTH_endRandomValue  = 20000;//
 		//public final static int 	 CLOUDLET_PES					 = 1;
-		public final static String 	daxPath 			 = "D:/dax/Inspiral_1000.xml"; // The workflow dataset (Montage_50.xml ; CyberShake_50 ; Sipht_60.xml ; Inspiral_50.xml)
+		public final static String 	daxPath 			 = "D:/dax/CyberShake_100.xml"; // The workflow dataset (Montage_50.xml ; CyberShake_50 ; Sipht_60.xml ; Inspiral_50.xml)
 
 		/**
 		 *  
@@ -44,7 +44,7 @@ public class JobSchedulingConstants {
 		//public final static int[] VM_PES			 = createPE(VM_number,1); // number of CPUs		//public final static int[] VM_MIPS			 = createSequenceMips(VM_number);
 		public final static double[] VM_MIPSArr		 = createSequenceMips(VM_number);
 		public final static double	VM_MIPS 		 = 250; //250 mips for paper of power 2^i mips speed.
-		public final static double	BalancePercentage= 0.01; // the average percentage should be < 1.0 
+		public final static double	BalancePercentage= 0.2; // the average percentage should be < 1.0 
 		public final static double	ratio			 = 0; // (0 or 1) 0 if no increment will be applied and 1 if there is range of VM MIPS (firstRange & LastRange).
 		public final static double	firstRange		 = VM_MIPS; 
 		public final static double	lastRange 	 	 = 2000; 
