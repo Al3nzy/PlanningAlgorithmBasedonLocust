@@ -1,7 +1,6 @@
-
 package org.workflowsim.examples.scheduling;
 
-/**
+	/**
 	 *@author Mohammed Alaa Ala'anzy  
 	 *  
 	 *
@@ -96,11 +95,11 @@ public class JobSchedulingConstants {
 		 *  
 		 */
 		public final static int		HOST_TYPES	 = 2;
-		public final static int 	HOST_Number	 = 20;
+		public final static int 	HOST_Number	 = 1;
 		public final static int[] 	HOST_MIPS	 = {2000,2000}; // PE mips
-		public final static int[] 	HOST_PES	 = {4,4};
+		public final static int[] 	HOST_PES	 = {2,2};
 		public final static int[] 	HOST_RAM	 = {2048,2048}; //host memory (MB) (IT WAS 2GB,,102400
-		public final static int 	HOST_BW		 = 10000; //10000;
+		public final static int 	HOST_BW		 = 100000; //10000;
 		public final static int		HOST_STORAGE = 1000000; // 1 GB// host storage
 
 		/**
@@ -111,7 +110,7 @@ public class JobSchedulingConstants {
 		public final static String os        		= "Linux"; // operating system
 		public final static String DC_vmm 	 		= "Xen";
 		public final static double time_zone 		= 10.0; // time zone this resource located
-		public final static double cost		 		= 2.0; // (original 3.0) the cost of using processing in this resource
+		public final static double cost		 		= 3.0; // (original 3.0) the cost of using processing in this resource
 		public final static double costPerMem		= 0.05; // the cost of using memory in this resource
 		public final static double costPerStorage	= 0.1; // the cost of using storage in this resource
 		public final static double costPerBw		= 0.1; // the cost of using bw in this resource		
