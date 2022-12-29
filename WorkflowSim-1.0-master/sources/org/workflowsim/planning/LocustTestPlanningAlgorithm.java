@@ -1,17 +1,12 @@
 /**
- * Copyright 2012-2013 University Of Southern California
+ * Copyright 2023 Universiti Putra Malaysia
+ * 
+ * @author Mohammed Alaa Ala'anzy
+ *	
+ * Please cite my work that you may find in my GoogleScholar Profile below:
+ * https://scholar.google.com/citations?user=VXZj91UAAAAJ&hl=en 
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
  */
 package org.workflowsim.planning;
 
@@ -273,48 +268,15 @@ public class LocustTestPlanningAlgorithm extends BasePlanningAlgorithm {
         		LocustTasks=UpdatedSequenceofTasks(taskSort,smallestTasksSet);
 	
     		}
-    	
-//    	for (Iterator it = getTaskList().iterator(); it.hasNext();) {
-//            Task task = (Task) it.next();
-
     	CondorVM vm = (CondorVM) getVmList().get(0);
 		for (int i = 0; i < LocustTasks.length; i++) {
           x++;
-  
-          
-   
-			//double duration = task.getCloudletLength() / 1000;
- 		
-              
-         //   for(int i = 0; i < task.getParentList().size(); i++ ){
-			
-         //   	Task parent = task.getParentList().get(i);
-              // Log.printLine("parent no "+ i+"   cloudletId "+ parent.getCloudletId());
-//            }           
-          //  for(int i = 0; i < task.getChildList().size(); i++ ){
-			
-           // 	Task child = task.getChildList().get(i);
-// 				Log.printLine("child no "+ i+"   cloudletId "+ child.getCloudletId());
-            
-//            } 	
-   //         CondorVM vm = (CondorVM) getVmList().get(0);
-            
+           
            //selecting the Fastest VM taking into consideration the queue of submitted tasks in that VM          
             vm= CheckingTheVMFinishTimeAfterAssigning(LocustTasks[x]);
   
             LocustTasks[x].setVmId(vm.getId()); // submission the tasks onto a VM
-//   		task.setVmId(vm.getId()); // submission the task to the VM                    
-//	        long deadline = Parameters.getDeadline();
-            
-//            Log.printLine(" task ID "+ LocustTasks[x].getCloudletId()+ "||| total length= "+LocustTasks[x].getCloudletTotalLength() + "||| have submitted on VM= "+LocustTasks[x].getVmId());
-//            Log.printLine(" task ID "+ LocustTasks[x].getCloudletId()+ "|| getCloudletFinishedSoFar = "+ LocustTasks[x].getCloudletFinishedSoFar()+" ||| getFinishTime=  " +LocustTasks[x].getFinishTime()+ " ||| getTaskFinishTime=  " +LocustTasks[x].getTaskFinishTime());
 		}
-		
-		
-//    	for (int i=0; i<BalancNum;i++) {// Submitting the set of smallest tasks based on balancNum onto a specific VM. 
-//    		x++;
-//    		LocustTasks[x].setVmId(3); 
-//            Log.printLine(" task ID "+ LocustTasks[x].getCloudletId()+ "||| total length= "+LocustTasks[x].getCloudletTotalLength() + "||| have submitted on VM= "+LocustTasks[x].getVmId());   		
-//    	}
+
     }
 }

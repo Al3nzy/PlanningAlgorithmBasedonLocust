@@ -119,9 +119,8 @@ public class LocustPlanningtest extends WorkflowSimBasicExample1{
                 Log.printLine("Warning: Please replace daxPath with the physical path in your working environment!");
                 return;
             }
-
             Parameters.SchedulingAlgorithm sch_method = Parameters.SchedulingAlgorithm.STATIC;
-            Parameters.PlanningAlgorithm pln_method = Parameters.PlanningAlgorithm.LocustTestPlanning; // INVALID, RANDOM, HEFT, DHEFT, LocustTestPlanning
+            Parameters.PlanningAlgorithm pln_method = Parameters.PlanningAlgorithm.LOCUSTPlANNING; // INVALID, RANDOM, HEFT, DHEFT, LocustTestPlanning
             ReplicaCatalog.FileSystem file_system = ReplicaCatalog.FileSystem.LOCAL;
 
             /**

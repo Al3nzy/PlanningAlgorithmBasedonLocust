@@ -331,13 +331,13 @@ public class Task extends Cloudlet {
     public double getProcessingCost() {
         // cloudlet cost: execution cost...
 
-        double cost = getCostPerSec() * getActualCPUTime();
+        double cost = getCostPerSec() * getActualCPUTime(); //getActualCPUTime()= getFinishTime() - getExecStartTime();
         
         // ...plus input data transfer cost...
         long fileSize = 0;
         for(Iterator it = getFileList().iterator(); it.hasNext();){
             org.cloudbus.cloudsim.File file = (org.cloudbus.cloudsim.File) it.next();
-            fileSize += file.getSize() / Consts.MILLION;
+            fileSize += file.getSize() / Consts.MILLION;// int MILLION = 1000000 and the file size (in MBytes)
         }
         cost += costPerBw * fileSize;
         return cost;

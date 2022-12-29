@@ -196,7 +196,7 @@ public class WorkflowPlanner extends SimEntity {
             case DHEFT:
                 planner = new DHEFTPlanningAlgorithm();
                 break;
-            case LocustTestPlanning:
+            case LOCUSTPlANNING:
                 planner = new LocustTestPlanningAlgorithm();
                 break;
             default:

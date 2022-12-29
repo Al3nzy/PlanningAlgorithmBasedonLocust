@@ -18,7 +18,7 @@ public class JobSchedulingConstants {
 		 * 
 		 * */
 		//public final static int	 Cloudlet_number 				 = 500;
-		//public final static int 	 Cloudlet_mips[]				 = { 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000 };
+		//public final static int 	 Cloudlet_mips[]				 = {1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000 };
 		//public final static int 	 Cloudlet_mips					 = 1000;
 		//public final static long 	 fileSize 						 = 300;
 		//public final static long 	 outputSize 					 = 300;	
@@ -26,7 +26,7 @@ public class JobSchedulingConstants {
 		//public final static double CLOUDLET_LENGTH_startRandomValue= 1000; //The initial value for the random generation 
 		//public final static double CLOUDLET_LENGTH_endRandomValue  = 20000;//
 		//public final static int 	 CLOUDLET_PES					 = 1;
-		public final static String 	daxPath 			 = "D:/dax/CyberShake_100.xml"; // The workflow dataset (Montage_50.xml ; CyberShake_50 ; Sipht_60.xml ; Inspiral_50.xml)
+		public final static String 	daxPath 			 = "D:/dax/sipht_1000.xml"; // The workflow dataset (Montage_50.xml ; CyberShake_50 ; Sipht_60.xml ; Inspiral_50.xml)
 
 		/**
 		 *  
@@ -111,7 +111,7 @@ public class JobSchedulingConstants {
 		public final static String os        		= "Linux"; // operating system
 		public final static String DC_vmm 	 		= "Xen";
 		public final static double time_zone 		= 10.0; // time zone this resource located
-		public final static double cost		 		= 2.0; // (original 3.0) the cost of using processing in this resource
+		public final static double cost		 		= 3.0; // (original 3.0) the cost of using processing in this resource
 		public final static double costPerMem		= 0.05; // the cost of using memory in this resource
 		public final static double costPerStorage	= 0.1; // the cost of using storage in this resource
 		public final static double costPerBw		= 0.1; // the cost of using bw in this resource		
