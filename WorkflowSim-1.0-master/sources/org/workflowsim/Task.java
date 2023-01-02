@@ -323,7 +323,7 @@ public class Task extends Cloudlet {
      * Task is stored in fileList <tt>Processing Cost = input data transfer +
      * processing cost + output transfer cost</tt> .
      *
-     * @return the total cost of processing Cloudlet
+     * @return the total cost of processing Cloudlet 
      * @pre $none
      * @post $result >= 0.0
      */
