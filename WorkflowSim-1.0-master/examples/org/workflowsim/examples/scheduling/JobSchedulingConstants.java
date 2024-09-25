@@ -25,7 +25,7 @@ public class JobSchedulingConstants {
 		//public final static double CLOUDLET_LENGTH_startRandomValue= 1000; //The initial value for the random generation 
 		//public final static double CLOUDLET_LENGTH_endRandomValue  = 20000;//
 		//public final static int 	 CLOUDLET_PES					 = 1;
-		public final static String 	daxPath 			 = "WorkflowSim-1.0-master/config/dax/sipht_1000.xml"; // .The workflow dataset (Montage_50.xml ; CyberShake_50 ; Sipht_60.xml ; Inspiral_50.xml)
+		public final static String 	daxPath 			 = "WorkflowSim-1.0-master/config/dax/sipht_1000.xml"; //The workflow dataset (Montage_50.xml ; CyberShake_50 ; Sipht_60.xml ; Inspiral_50.xml)
  
 		/**
 		 *  
