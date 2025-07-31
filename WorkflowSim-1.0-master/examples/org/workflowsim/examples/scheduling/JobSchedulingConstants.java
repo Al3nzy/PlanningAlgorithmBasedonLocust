@@ -31,11 +31,11 @@ public class JobSchedulingConstants {
 		 *  
 		 * VM Parameters
 		 */	
-		public final static int		VM_number 		 = 4;
+		public final static int		VM_number 		 = 4; 
 		public final static int		VM_ram			 = 512; // vm memory (MB) 512; \\40 GB = 40000
 		public final static int 	pesNumber 		 = 1; // number of cpus
 		public final static String 	vmm 			 = "Xen"; // VMM name
-		public final static int 	VM_BW			 = 160;     //100000; // 100 Mbit/s ; 160 Mbit/s = 20 MBps according to
+		public final static int 	VM_BW			 = 16;     //100000; // 100 Mbit/s ; 160 Mbit/s = 20 MBps according to
 		public final static int 	VM_SIZE			 = 10000;   // image size (MB)  //2500; // 2.5 GB
 		//public final static int 	VM_TYPES	   	 = 4;
 		//public final static int[] VM_RAM			 = { 870,  1740, 1740, 613 };

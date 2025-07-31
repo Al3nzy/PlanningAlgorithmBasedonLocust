@@ -1,0 +1,507 @@
+Job scheduling Constant.Java
+package org.workflowsim.examples.scheduling;
+
+	/**
+	 *@author Mohammed Alaa Ala'anzy  
+	 *  
+	 *
+	 * 
+	 * @since  16 November, 2022
+	 */
+public class JobSchedulingConstants {
+		public static int current_iteration;
+		public static int Algo_iteration=1;
+		//public final static int num_user = 1;
+		
+		/**
+		 * Cloudlet  types and configuration:
+		 * 
+		 * */
+		//public final static int	 Cloudlet_number 				 = 500;
+		//public final static int 	 Cloudlet_mips[]				 = {1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000 };
+		//public final static int 	 Cloudlet_mips					 = 1000;
+		//public final static long 	 fileSize 						 = 300;
+		//public final static long 	 outputSize 					 = 300;	
+		//public final static int 	 pesNumber 						 = 1;
+		//public final static double CLOUDLET_LENGTH_startRandomValue= 1000; //The initial value for the random generation 
+		//public final static double CLOUDLET_LENGTH_endRandomValue  = 20000;//
+		//public final static int 	 CLOUDLET_PES					 = 1;
+		public final static String 	daxPath 			 = "WorkflowSim-1.0-master/config/dax/sipht_1000.xml"; //The workflow dataset (Montage_50.xml ; CyberShake_50 ; Sipht_60.xml ; Inspiral_50.xml)
+ 
+		/**
+		 *  
+		 * VM Parameters
+		 */	
+		public final static int		VM_number 		 = 4;
+		public final static int		VM_ram			 = 512; // vm memory (MB) 512; \\40 GB = 40000
+		public final static int 	pesNumber 		 = 1; // number of cpus
+		public final static String 	vmm 			 = "Xen"; // VMM name
+		public final static int 	VM_BW			 = 160;     //100000; // 100 Mbit/s ; 160 Mbit/s = 20 MBps according to
+		public final static int 	VM_SIZE			 = 10000;   // image size (MB)  //2500; // 2.5 GB
+		//public final static int 	VM_TYPES	   	 = 4;
+		//public final static int[] VM_RAM			 = { 870,  1740, 1740, 613 };
+		//public final static int[] VM_MIPS			 = createSequenceMips(VM_number);
+		//public final static int[] VM_PES			 = createPE(VM_number,1); // number of CPUs		//public final static int[] VM_MIPS			 = createSequenceMips(VM_number);
+		public final static double[] VM_MIPSArr		 = createSequenceMips(VM_number);
+		public final static double	VM_MIPS 		 = 250; //250 mips for paper of power 2^i mips speed.
+		public final static double	BalancePercentage= 0.2; // the average percentage should be < 1.0 
+		public final static double	ratio			 = 0; // (0 or 1) 0 if no increment will be applied and 1 if there is range of VM MIPS (firstRange & LastRange).
+		public final static double	firstRange		 = VM_MIPS; 
+		public final static double	lastRange 	 	 = 2000; 
+		// The cost parameters in case Using the Cost per VM (Contractor 2, 3) in CondorVM.java
+		public final static double[] VariantVmcost 	 = {0.15,0.3,0.6,0.9};  // In cast the VM cost is variant based on MIPS ((0.9-0.15)/0.15)/arrlenth-1    
+		public final static double Vmcost 			 = 0;  // as set in paper 13   (unused)    
+		public final static double VmcostPerCpu 	 = 3.0;    // the cost of using processing in this resource
+		public final static double VmcostPerMem 	 = 0.05;   // the cost of using memory in this resource
+		public final static double VmcostPerStorage  = 0.1;	   // the cost of using storage in this resource
+        public final static double VmcostPerBw 		 = 0.001;	   // the cost of using bw in this resource
+		// testing the committing.f.
+        /**
+		 * @return the array of VM MIPS by sending the VM number to make the array based on 
+		 * 
+		 */
+		public static double[] createSequenceMips(int VM_number) {
+			double[] VM_MIPS = new double [VM_number];
+			int i=0;
+			VM_MIPS[i]=firstRange;
+			i++;
+			while (i!=0&&i<VM_number) {
+				VM_MIPS[i]= VM_MIPS[i-1]*2;// to get the double of MIPS based on the previous MIPS
+				i++;
+			}
+			 
+//			for (int i=0; i<VM_number;i++) {
+			//	VM_MIPS[i-1]= 1000*i; // 1000 cuz I want the vm Mips in secquence of 1000-10,000
+			//	VM_MIPS[i-1]= 2400; // 1000 cuz I want the vm Mips in secquence of 1000-10,000	
+				
+//				VM_MIPS[i]= VM_MIPS[i-1]*2; // 1000 cuz I want the vm Mips in secquence of 1000-10,000	
+				
+//			}			
+			return VM_MIPS;
+		}
+		
+		/**
+		 * @return the array of PE by sending the VM number to make the array based on
+		 */
+		public static int[] createPE(int VM_number, int PE) {
+			int[] VM_PEs = new int [VM_number];
+			for (int i=1; i<=VM_number;i++) {
+				VM_PEs[i-1]= PE; // 1 cuz I want the all the PEs array =1 for each VM (each VM has 1 PE).
+			}			
+			return VM_PEs;		
+		}
+	
+		/**
+		 * Host Configuration:
+		 *  
+		 */
+		public final static int		HOST_TYPES	 = 2;
+		public final static int 	HOST_Number	 = 1;
+		public final static int[] 	HOST_MIPS	 = {2000,2000}; // PE mips
+		public final static int[] 	HOST_PES	 = {2,2};
+		public final static int[] 	HOST_RAM	 = {2048,2048}; //host memory (MB) (IT WAS 2GB,,102400
+		public final static int 	HOST_BW		 = 100000; //10000;
+		public final static int		HOST_STORAGE = 1000000; // 1 GB// host storage
+
+		/**
+		 * Host Configuration:
+		 *and its price (G$/Pe time unit).
+		 */
+		public final static String arch     		= "x86"; // system architecture
+		public final static String os        		= "Linux"; // operating system
+		public final static String DC_vmm 	 		= "Xen";
+		public final static double time_zone 		= 10.0; // time zone this resource located
+		public final static double cost		 		= 3.0; // (original 3.0) the cost of using processing in this resource
+		public final static double costPerMem		= 0.05; // the cost of using memory in this resource
+		public final static double costPerStorage	= 0.1; // the cost of using storage in this resource
+		public final static double costPerBw		= 0.1; // the cost of using bw in this resource		
+	}
+
+
+
+______________________________________________
+
+Locus planning test
+/**
+ * Copyright 2022-2023 University Of Putra Malaysia
+ */
+package org.workflowsim.examples.planning;
+import java.io.File;
+import java.text.DecimalFormat;
+import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.cloudbus.cloudsim.CloudletSchedulerSpaceShared;
+import org.cloudbus.cloudsim.Log;
+import org.cloudbus.cloudsim.core.CloudSim;
+import org.workflowsim.CondorVM;
+import org.workflowsim.WorkflowDatacenter;
+import org.workflowsim.Job;
+import org.workflowsim.WorkflowEngine;
+import org.workflowsim.WorkflowPlanner;
+import org.workflowsim.examples.WorkflowSimBasicExample1;
+import org.workflowsim.examples.scheduling.JobSchedulingConstants;
+import org.workflowsim.utils.ClusteringParameters;
+import org.workflowsim.utils.OverheadParameters;
+import org.workflowsim.utils.Parameters;
+import org.workflowsim.utils.ReplicaCatalog;
+
+/**
+ * This Locust Optimization Algorithm that used as a PhD work 
+ *
+ * @author Ala'anzy
+ * @since WorkflowSim Toolkit 1.1
+ * @date Oct 18, 2022
+ */
+public class LocustPlanningtest extends WorkflowSimBasicExample1{
+	//private static double[] Averagemakespan;
+	public static int iteration;
+	static DecimalFormat dft = new DecimalFormat("###.##");
+
+	////////////////////////// STATIC METHODS ///////////////////////
+    protected static List<CondorVM> createVM(int userId, int vms) {
+
+        //Creates a container to store VMs. This list is passed to the broker later
+        LinkedList<CondorVM> list = new LinkedList<CondorVM>();
+
+        //create VMs
+        CondorVM[] vm = new CondorVM[vms];
+        double rangePower=((JobSchedulingConstants.lastRange-JobSchedulingConstants.firstRange)/JobSchedulingConstants.firstRange)/(vms-1); //the percentage of increasements based on the first and last range of VM increasing. takeing into consideration the number of VMs. 
+        double ratio=JobSchedulingConstants.ratio;
+        	//Random bwRandom = new Random(System.currentTimeMillis());
+      
+        for (int i = 0; i < vms; i++){           
+        	ratio = (rangePower* i)*JobSchedulingConstants.ratio;// I multiplied by Job....ratio to make the increment 0 in case there is fix VM MIPS where I will send the ratio 0 or 1 (0 if no increment and 1 if there is increment).
+        	ratio=ratio*JobSchedulingConstants.firstRange; // the increasing for the specific VM will maintaining the First range.
+        	
+        	//double ratio = Math.pow(rangePower, i);// (500*1.8)(500*3.6)(500*5.4)(500*7.2)
+        	//double ratio=i+1.5; //Alanzy update ratio = i+1.5; mips * ratio // (bw*ratio)
+            
+        	// The VM constructor that uses the DC cost model.
+        	//vm[i] = new CondorVM(i, userId, JobSchedulingConstants.VM_MIPS + ratio , JobSchedulingConstants.pesNumber, JobSchedulingConstants.VM_ram, (long) (JobSchedulingConstants.VM_BW * 1), JobSchedulingConstants.VM_SIZE, JobSchedulingConstants.vmm, new CloudletSchedulerSpaceShared());
+        	
+        	// The VM constructor that uses the VM cost model.
+        	vm[i] = new CondorVM(i, 
+        			userId, 
+        		//	JobSchedulingConstants.VM_MIPS + ratio ,
+        			JobSchedulingConstants.VM_MIPSArr[i] ,
+        			JobSchedulingConstants.pesNumber,
+        			JobSchedulingConstants.VM_ram,
+        			(long) (JobSchedulingConstants.VM_BW * 1),
+        			JobSchedulingConstants.VM_SIZE,
+        			JobSchedulingConstants.vmm,
+        			JobSchedulingConstants.Vmcost,
+        			JobSchedulingConstants.VariantVmcost[i], // in case there is varian of cost prices based on the Vm using
+        			//JobSchedulingConstants.VmcostPerCpu,
+        			JobSchedulingConstants.VmcostPerMem,
+        			JobSchedulingConstants.VmcostPerStorage,
+        			JobSchedulingConstants.VmcostPerBw,
+        			new CloudletSchedulerSpaceShared());
+
+            list.add(vm[i]);
+        	System.out.println("Random vm" + i +" is = " + dft.format(vm[i].getMips()) +" || the ratio value is = " + dft.format(ratio));
+        }
+        return list;
+    }
+    
+    
+    /**
+     * Creates main() to run this example This example has only one datacenter
+     * and one storage
+     */
+    public static void main(String[] args) {
+    	//getAveragemakespan();
+    	JobSchedulingConstants.current_iteration=0;
+    	for (JobSchedulingConstants.current_iteration=0; JobSchedulingConstants.current_iteration<JobSchedulingConstants.Algo_iteration;JobSchedulingConstants.current_iteration++ ) {
+			Log.printLine("Starting Locust... \n          Iteration No. "+ (JobSchedulingConstants.current_iteration+1) );
+			if (JobSchedulingConstants.current_iteration==0) {
+				
+				double[] makespan=new double[JobSchedulingConstants.Algo_iteration];
+				double[] Cost=new double[JobSchedulingConstants.Algo_iteration];
+
+				setAveragemakespan(makespan);
+				setAverageCost(Cost);
+			}
+        
+        try {
+            // First step: Initialize the WorkflowSim package. 
+
+            /**
+             * However, the exact number of vms may not necessarily be vmNum If
+             * the data center or the host doesn't have sufficient resources the
+             * exact vmNum would be smaller than that. Take care.
+             */
+
+        	/**
+             * Should change this based on real physical path
+             */
+            String daxPath = JobSchedulingConstants.daxPath;//CyberShake ;Sipht_1000
+            
+            File daxFile = new File(daxPath);
+            if(!daxFile.exists()){
+                Log.printLine("Warning: Please replace daxPath with the physical path in your working environment!");
+                return;
+            }
+            Parameters.SchedulingAlgorithm sch_method = Parameters.SchedulingAlgorithm.STATIC;
+            Parameters.PlanningAlgorithm pln_method = Parameters.PlanningAlgorithm.LOCUSTPlANNING; // INVALID, RANDOM, HEFT, DHEFT, LocustTestPlanning
+            ReplicaCatalog.FileSystem file_system = ReplicaCatalog.FileSystem.LOCAL;
+
+            /**
+             * Set the cost model to be VM (the default is Datacenter
+             */
+            Parameters.setCostModel(Parameters.CostModel.VM); // I can choose between DATACENTER & VM model
+
+            
+            /**
+             * No overheads 
+             */
+            OverheadParameters op = new OverheadParameters(0, null, null, null, null, 0);;
+            
+            /**
+             * No Clustering
+             */
+            ClusteringParameters.ClusteringMethod method = ClusteringParameters.ClusteringMethod.NONE;
+            ClusteringParameters cp = new ClusteringParameters(0, 0, method, null);
+
+            /**
+             * Initialize static parameters
+             */
+            Parameters.init(JobSchedulingConstants.VM_number, daxPath, null,
+                    null, op, cp, sch_method, pln_method,
+                    null, 0);
+            ReplicaCatalog.init(file_system);
+
+            // before creating any entities.
+            int num_user = 1;   // number of grid users
+            Calendar calendar = Calendar.getInstance();
+            boolean trace_flag = false;  // mean trace events
+
+            // Initialize the CloudSim library
+            CloudSim.init(num_user, calendar, trace_flag);
+            WorkflowDatacenter datacenter0 = createDatacenter("Datacenter_0");
+
+            /**
+             * Create a WorkflowPlanner with one schedulers.
+             */
+            WorkflowPlanner wfPlanner = new WorkflowPlanner("planner_0", 1);
+            /**
+             * Create a WorkflowEngine.
+             */
+            WorkflowEngine wfEngine = wfPlanner.getWorkflowEngine();
+            /**
+             * Create a list of VMs.The userId of a vm is basically the id of
+             * the scheduler that controls this vm.
+             */
+            List<CondorVM> vmlist0 = createVM(wfEngine.getSchedulerId(0), Parameters.getVmNum());
+
+            /**
+             * Submits this list of vms to this WorkflowEngine.
+             */
+            wfEngine.submitVmList(vmlist0, 0);
+
+            /**
+             * Binds the data centers with the scheduler.
+             */
+            wfEngine.bindSchedulerDatacenter(datacenter0.getId(), 0);
+
+            CloudSim.startSimulation();
+
+
+            List<Job> outputList0 = wfEngine.getJobsReceivedList();
+
+            CloudSim.stopSimulation();
+
+            printJobList(outputList0);
+            Log.print("    The MIPS for them as follows :[");
+            for (int i = 0; i < vmlist0.size(); i++) {
+            	Log.print(vmlist0.get(i).getMips());
+            	if (i<vmlist0.size()-1) {
+            		Log.print("|");
+				}    	
+                vmlist0.get(i).getMips();	
+                if (i >= vmlist0.size()-1)
+                	Log.print("]");
+			}
+            
+            Log.printLine();
+            Log.printLine(" Simulation has been done!");
+			Log.printLine();
+			Log.printLine("_______________________________________________");
+
+        } catch (Exception e) {
+            Log.printLine("The simulation has been terminated due to an unexpected error");
+        }
+    }
+
+		double overall=0;
+		double Makespan=0;
+		double cost=0;
+		double totalCost=0;
+		double [] CostIndex=getAverageCost();
+		double[] makespanindix=getAveragemakespan();
+		for(int i=0; i<getAveragemakespan().length; i++){
+			overall = overall + makespanindix[i];
+			totalCost=totalCost+CostIndex[i];
+	    }   
+
+		Makespan=overall / makespanindix.length;
+		cost=totalCost/CostIndex.length;
+		Log.printLine( "Average Makespan for "+JobSchedulingConstants.current_iteration+" iterations is = "+  Makespan);
+		Log.printLine( "Average Cost for "+JobSchedulingConstants.current_iteration+" iterations is = "+  cost);
+
+}
+}
+_________________________________________________________________________________
+LocustWorkfkiwSchedulingAlgorithm:
+
+/**
+ * Copyright 2012-2013 University Of Southern California
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+package org.workflowsim.examples.scheduling;
+
+import java.io.File;
+import java.util.Calendar;
+import java.util.List;
+import org.cloudbus.cloudsim.Log;
+import org.cloudbus.cloudsim.core.CloudSim;
+import org.workflowsim.CondorVM;
+import org.workflowsim.WorkflowDatacenter;
+import org.workflowsim.Job;
+import org.workflowsim.WorkflowEngine;
+import org.workflowsim.WorkflowPlanner;
+import org.workflowsim.utils.ClusteringParameters;
+import org.workflowsim.utils.OverheadParameters;
+import org.workflowsim.utils.Parameters;
+import org.workflowsim.utils.ReplicaCatalog;
+
+/**
+ * This FCFS Scheduling Algorithm 
+ *
+ * @author Ala'anzy
+ * @since WorkflowSim Toolkit 1.1
+ * @date Oct 6, 2022
+ */
+public class LocustWorkflowSchedulingAlgorithm extends DataAwareSchedulingAlgorithmExample{
+
+    ////////////////////////// STATIC METHODS ///////////////////////
+    /**
+     * Creates main() to run this example This example has only one datacenter
+     * and one storage
+     */
+    public static void main(String[] args) {
+
+
+        try {
+            // First step: Initialize the WorkflowSim package. 
+
+            /**
+             * However, the exact number of vms may not necessarily be vmNum If
+             * the data center or the host doesn't have sufficient resources the
+             * exact vmNum would be smaller than that. Take care.
+             */
+          //  int vmNum = 5;//number of vms;
+            /**
+             * Should change this based on real physical path
+             */
+            String daxPath = "E:/WorkflowSim-1.0-master/WorkflowSim-1.0-master/config/dax/Montage_100.xml";
+            
+            File daxFile = new File(daxPath);
+            if(!daxFile.exists()){
+                Log.printLine("Warning: Please replace daxPath with the physical path in your working environment!");
+                return;
+            }
+
+            /**
+             * Since we are using HEFT planning algorithm, the scheduling algorithm should be static 
+             * such that the scheduler would not override the result of the planner
+             */
+            Parameters.SchedulingAlgorithm sch_method = Parameters.SchedulingAlgorithm.Locust;//STATIC, Locust, 
+            Parameters.PlanningAlgorithm pln_method = Parameters.PlanningAlgorithm.INVALID;//INVALID, HEFT
+            ReplicaCatalog.FileSystem file_system = ReplicaCatalog.FileSystem.LOCAL;
+
+            /**
+             * No overheads 
+             */
+            OverheadParameters op = new OverheadParameters(0, null, null, null, null, 0);;
+            
+            /**
+             * No Clustering
+             */
+            ClusteringParameters.ClusteringMethod method = ClusteringParameters.ClusteringMethod.NONE;
+            ClusteringParameters cp = new ClusteringParameters(0, 0, method, null);
+
+            /**
+             * Initialize static parameters
+             */
+            Parameters.init(JobSchedulingConstants.VM_number, daxPath, null,
+                    null, op, cp, sch_method, pln_method,
+                    null, 0);
+            ReplicaCatalog.init(file_system);
+
+            // before creating any entities.
+            int num_user = 1;   // number of grid users
+            Calendar calendar = Calendar.getInstance();
+            boolean trace_flag = false;  // mean trace events
+
+            // Initialize the CloudSim library
+            CloudSim.init(num_user, calendar, trace_flag);
+
+            WorkflowDatacenter datacenter0 = createDatacenter("Datacenter_0");
+
+            /**
+             * Create a WorkflowPlanner with one schedulers.
+             */
+            WorkflowPlanner wfPlanner = new WorkflowPlanner("planner_0", 1);
+            /**
+             * Create a WorkflowEngine.
+             */
+            WorkflowEngine wfEngine = wfPlanner.getWorkflowEngine();
+            /**
+             * Create a list of VMs.The userId of a vm is basically the id of
+             * the scheduler that controls this vm.
+             * Random VM MIPS creating (Alanzy)
+             */
+            List<CondorVM> vmlist0 = createVM(wfEngine.getSchedulerId(0), Parameters.getVmNum());
+
+            /**
+             * Submits this list of vms to this WorkflowEngine.
+             */
+            wfEngine.submitVmList(vmlist0, 0);
+
+            /**
+             * Binds the data centers with the scheduler.
+             */
+            wfEngine.bindSchedulerDatacenter(datacenter0.getId(), 0);
+
+            CloudSim.startSimulation();
+
+
+            List<Job> outputList0 = wfEngine.getJobsReceivedList();
+
+            CloudSim.stopSimulation();
+
+            printJobList(outputList0);
+
+
+        } catch (Exception e) {
+            Log.printLine("The simulation has been terminated due to an unexpected error");
+        }
+    }
+
+   
+}
+
+%here I am checking 31 July 2025

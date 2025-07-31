@@ -59,7 +59,7 @@ public class LocustWorkflowSchedulingAlgorithm extends DataAwareSchedulingAlgori
             /**
              * Should change this based on real physical path
              */
-            String daxPath = "E:/WorkflowSim-1.0-master/WorkflowSim-1.0-master/config/dax/Montage_100.xml";
+            String daxPath = "WorkflowSim-1.0-master/config/dax/Montage_1000.xml";
             
             File daxFile = new File(daxPath);
             if(!daxFile.exists()){
